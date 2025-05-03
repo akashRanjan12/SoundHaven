@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SoundHaven</title>
+    <title>S☆undHaven</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -53,10 +53,10 @@
     <pc-part class="pc-only-design">
       <header>
         <div class="navbar">
-          <div class="logo">𝄞 S☆und Haven</div>
+          <div class="logo">𝄞☆undHaven</div>
           <div class="acc">
-          <a href="" class="white-btn">Create Acc</a>
-          <a href="" class="transparent-btn">Sigin</a>
+            <a href="pages/sigin.php" class="white-btn">Create Acc</a>
+            <a href="pages/login.php" class="transparent-btn">Login</a>
           </div>
         </div>
       </header>
@@ -76,8 +76,12 @@
                 upload.
               </div>
               <div class="buttons">
-                <a href="" class="white-btn">Get Started</a>
-                <a href="" class="transparent-btn">Explore GO +</a>
+                <a href="User/userDashboard.php" class="white-btn"
+                  >Get Started</a
+                >
+                <a href="User/userDashboard.php" class="transparent-btn"
+                  >Explore GO +</a
+                >
               </div>
             </div>
           </div>
@@ -93,8 +97,10 @@
                 to discover and connect through music.
               </div>
               <div class="buttons">
-                <a href="" class="white-btn">Playlists</a>
-                <a href="" class="transparent-btn">Explore GO +</a>
+                <a href="pages/playlist.php" class="white-btn">Playlists</a>
+                <a href="User/userDashboard.php" class="transparent-btn"
+                  >Explore GO +</a
+                >
               </div>
             </div>
           </div>
@@ -110,8 +116,10 @@
                 find anywhere else.
               </div>
               <div class="buttons">
-                <a href="" class="white-btn">UPOAD</a>
-                <a href="" class="transparent-btn">Explore GO +</a>
+                <a href="User/userProfile.php" class="white-btn">UPOAD</a>
+                <a href="User/userDashboard.php" class="transparent-btn"
+                  >Explore GO +</a
+                >
               </div>
             </div>
           </div>
@@ -126,8 +134,8 @@
                 grow your audience. What are you waiting for? Join us!
               </div>
               <div class="buttons">
-                <a href="" class="white-btn">Create acc</a>
-                <a href="" class="transparent-btn">Sigin</a>
+                <a href="pages/sigin.php" class="white-btn">Create acc</a>
+                <a href="pages/login.php" class="transparent-btn">Login</a>
               </div>
             </div>
           </div>
@@ -157,14 +165,12 @@
         <div class="time"></div>
       </div>
       <!-- circle down button -->
-      <a href="index.html#down"
-        ><i class="fa fa-arrow-down-long fa-bounce"></i>.</a
-      >
+      <a href="#down"><i class="fa fa-arrow-down-long fa-bounce"></i>.</a>
       <!-- secont page of pc part -->
       <a name="down"></a>
       <div class="down-container">
         <div class="logo reveal">𝄞 S☆und Haven</div>
-        <div class="cont-01  reveal">
+        <div class="cont-01 reveal">
           <div class="search-container">
             <form action="serch.php" method="POST">
               <input
@@ -173,22 +179,24 @@
             </form>
           </div>
           <font style="font-size: 1.5rem">𝑜𝓇</font>
-          <a href=""><div class="btn-cont white-btn">upload Your Own.</div></a>
+          <a href="User/userProfile.php"
+            ><div class="btn-cont white-btn">upload Your Own.</div></a
+          >
         </div>
-        <div class="cont-02  reveal">
+        <div class="cont-02 reveal">
           <p>
             "Start by finding the music you love using the search, or upload
             your own tracks to share with others. <br />
             When you're ready for something new, hit Explore More and discover
             fresh sounds waiting for you."
           </p>
-          <a href=""
+          <a href="pages/playlist.php"
             ><div class="btn-cont transparent-btn">Explore Playlists.</div></a
           >
         </div>
       </div>
       <div class="container-02">
-        <div class="cont-01  reveal">
+        <div class="cont-01 reveal">
           <div class="data">
             <h1>Calling all creators</h1>
             <p>
@@ -197,7 +205,9 @@
               What are you waiting for?
             </p>
             <br />
-            <a href="" class="white-btn">Find Out More.</a>
+            <a href="User/userDashboard.php" class="white-btn"
+              >Find Out More.</a
+            >
           </div>
           <div class="image">
             <img
@@ -221,26 +231,117 @@
               then explore more to see what others are creating too."
             </p>
             <br />
-            <a href="" class="transparent-btn">UPLOAD.</a>
+            <a href="User/userProfile.php" class="transparent-btn">UPLOAD.</a>
           </div>
         </div>
         <div class="container-03 reveal">
           <h1>Thanks for listening. Now join us.</h1>
           <p>Save tracks, follow artists and build playlists. All for free.</p>
-          <a href="" class="transparent-btn">Create new account.</a>
-          <p>Already hava an account? <a href=""> Sigin!</a></p>
+          <a href="pages/sigin.php" class="transparent-btn"
+            >Create new account.</a
+          >
+          <p>Already hava an account? <a href="pages/login.php"> Login!</a></p>
         </div>
       </div>
       <!-- <i class="fa-solid fa-guitar"></i> -->
-       <footer style="padding-top: 60px;">
+    </pc-part>
+    <responsive-part class="resp-design">
+      <!-- top navbar -->
+      <div class="resp-navbar-top">
+        <div class="logo">𝄞☆undHaven</div>
+        <div class="buttons">
+          <a href="pages/login.php" class="transparent-btn">Login</a>
+          <a href="" class="white-btn">Listen in app.</a>
+        </div>
+      </div>
+      <!-- end top navbar -->
+      <!-- main part of tb/mb -->
+      <div class="landing-image">
+        <img src="assets/rawMat/landingimage.jpeg" alt="" width="100%" />
+        <a href="pages/sigin.php" class="white-btn">Create a Free Account.</a>
+      </div>
+      <div class="after-landing-page">
+        <a href="pages/login.php" class="transparent-btn"
+          >Explore all Tracks &nbsp;<i
+            class="fa-solid fa-arrow-right-long fa-fade"></i
+        ></a>
+      </div>
+      <div class="playlist">
+        <div class="trending-music">
+          <p>Trending Musics..</p>
+          <div class="trending-music-div">
+            <!-- use #box already css updated -->
+            <!-- use this as a sample------- -->
+            <!-- <div class="box">
+                <div id="img"><img src="assets/rawMat/img01.jpg" alt="" width="190px" height="160px"></div>
+                <div id="data"><h3>heading of trending music</h3><h4>date and time</h4></div>
+               </div> -->
+          </div>
+        </div>
+        <div class="party-music">
+          <p>Party Music..</p>
+          <div class="party-music-div"></div>
+        </div>
+        <div class="workout-music">
+          <p>Workout Music..</p>
+          <div class="workout-music-div"></div>
+        </div>
+        <div class="chill-music">
+          <p>Chill Music..</p>
+          <div class="chill-music-div"></div>
+        </div>
+        <div class="feelgood-music">
+          <p>Feel Good Music..</p>
+          <div class="feelgood-music-div"></div>
+        </div>
+        <div class="study-music">
+          <p>Study Music..</p>
+          <div class="study-music-div"></div>
+        </div>
+        <div class="therapy-music">
+          <p>Therapy Music..</p>
+          <div class="therapy-music-div"></div>
+        </div>
+      </div>
+      <!-- end tab/mob -->
+      <!-- bottom navbar -->
+      <div class="resp-navbar-bottom">
+        <div class="options">
+          <a href="index.php"
+            ><i class="fa-solid fa-house-crack"></i><span>Home</span></a
+          >
+          <a href="User/userProfile.php"><i class="fa-solid fa-cloud"></i><span>Feed</span></a>
+          <a class="search"
+            ><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a
+          >
+          <a href="User/userLikesComments.php"
+            ><i class="fa-solid fa-swatchbook"></i><span>Library</span></a
+          >
+          <a href=""
+            ><i class="fa-solid fa-cloud-arrow-down"></i
+            ><span>Download</span></a
+          >
+        </div>
+      </div>
+      <!-- end bottom navbar -->
+    </responsive-part>
+    <footer style="padding-top: 60px">
         <?php
           require "includes/footer.php";
         ?>
-       </footer>
-    </pc-part>
-    <responsive-part class="resp-design"> tab/mobile </responsive-part>
+    </footer>
     <script src="assets/js/logic.js"></script>
     <script src="assets/js/suffle.js"></script>
     <script src="assets/js/preload.js"></script>
+    <script>
+      // prohibited to copy text
+      document.addEventListener("copy", function (event) {
+        event.clipboardData.setData(
+          "text/plain",
+          "⚠️ sorry content is not being copied."
+        );
+        event.preventDefault();
+      });
+    </script>
   </body>
 </html>

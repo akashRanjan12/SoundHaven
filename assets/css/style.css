@@ -9,6 +9,7 @@ a {
 }
 body {
   background-color: #010312;
+  color: whitesmoke;
 }
 /* select text effect For most modern browsers */
 ::selection {
@@ -121,12 +122,8 @@ body {
     stroke-dashoffset: 0;
   }
 }
-
 /* end preloader--------------------- */
 /* pc part=------------------------------------------------------------ */
-.pc-only-design {
-  color: whitesmoke;
-}
 .navbar {
   max-width: 80%;
   height: 50px;
@@ -506,7 +503,144 @@ body {
     }
   }
 }
+/* pc part end here-------------------- */
+/* tab/mobile part start---------------------------------------------------------- */
+.resp-design {
+  display: flex;
+  flex-direction: column;
+}
+.resp-navbar-top {
+  background-color: rgb(17, 17, 17);
+  width: 97%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+  align-items: center;
+  height: 40px;
+  margin-left: 10px;
+  .logo {
+    font-size: 2rem;
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+}
+/* bottom navbar */
+.resp-navbar-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 60px;
+  background-color: rgb(20, 20, 20);
+  z-index: 9999;
+  .options {
+    display: flex;
+    padding: 10px 4px;
+    justify-content: space-evenly;
+    a {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      i {
+        font-size: 1.5rem;
+      }
+      span {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+/* landing page */
+.landing-image {
+  .white-btn {
+    position: relative;
+    top: -20px;
+    display: flex;
+    justify-self: center;
+    width: 80%;
+  }
+}
+.after-landing-page {
+  .transparent-btn {
+    display: flex;
+    justify-self: center;
+    width: 90%;
+  }
+}
+/* playlist part ------------------------------------------ */
+.playlist {
+  .trending-music,
+  .party-music,
+  .workout-music,
+  .chill-music,
+  .feelgood-music,
+  .study-music,
+  .therapy-music {
+    p {
+      padding: 8px 20px;
+      font-size: 2rem;
+    }
+    .trending-music-div,
+    .party-music-div,
+    .workout-music-div,
+    .chill-music-div,
+    .feelgood-music-div,
+    .study-music-div,
+    .therapy-music-div {
+      margin-right: 20px;
+      margin-left: 20px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scrollbar-arrow-color: #010312;
+      .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 220px;
+        height: 220px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+/* end responsive part------------------------------------------------ */
 /* media queries------------------------------------------------------------------------ */
+@media screen and (max-width: 512px) {
+  .resp-navbar-top {
+    .buttons {
+      .transparent-btn {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin: 10px;
+      }
+      .white-btn {
+        display: none;
+      }
+    }
+  }
+  /* preloader */
+  #preloader {
+    h1,
+    h3 {
+      text-align: center;
+      color: white;
+    }
+    p {
+      font-size: 2rem;
+      color: whitesmoke;
+    }
+  }
+}
 @media screen and (max-width: 678px) {
   .carousel .list .item .content {
     padding-right: 0;

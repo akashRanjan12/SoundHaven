@@ -24,10 +24,12 @@
       }
       .container-01 {
         display: flex;
+        flex-wrap: wrap;
         gap: 40px;
         background-color: #010312;
         color: whitesmoke;
         justify-content: space-around;
+        align-items: center;
         padding: 40px 20px;
         .logo-cont {
           display: flex;
@@ -41,6 +43,7 @@
           .quote {
             padding: 5px 20px;
             font-size: 1.2rem;
+            text-align: center;
           }
         }
         .data-cont {
@@ -83,10 +86,10 @@
                   color: blue;
                 }
               }
-              .fa-github {
+              .fa-twitter {
                 transition: all 0.3s ease;
                 &:hover {
-                  color: rgb(98, 98, 98);
+                  color: rgb(48, 73, 255);
                 }
               }
               .fa-instagram {
@@ -106,15 +109,34 @@
         }
       }
       .footer-bottom {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
+        text-align: center;
         font-size: 1.2rem;
         padding: 30px 10px;
         color: aliceblue;
         background-color: #010312;
         border-top: 1px solid gray;
+      }
+      @media screen and (max-width: 512px) {
+        .container-01 {
+          /* justify-content: center; */
+          text-align: center;
+          .data-cont {
+          display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .logo-cont {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .logo {
+            font-size: 2.5rem;
+          }
+          .quote {
+            padding: 5px;
+          }
+        }
+        }
       }
     </style>
   </head>
@@ -134,23 +156,23 @@
         <div class="data-cont">
           <div class="dc-01">
             <h2>Explore</h2>
-            <a href="#">About Us</a>
-            <a href="#">Blog</a>
-            <a href="#">Charts</a>
-            <a href="#">Resources for Artists</a>
+            <a href="pages/aboutpage.php">About Us</a>
+            <a href="pages/Blogpage.php">Blog</a>
+            <a href="pages/playlist.php">Charts</a>
+            <a href="pages/premium.php">Resources for Artists</a>
           </div>
           <div class="dc-02">
             <h2>Support</h2>
-            <a href="#">Help Center</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Community Guidelines</a>
+            <a href="pages/helppage.php">Help Center</a>
+            <a href="pages/aboutpage.php">Privacy Policy</a>
+            <a href="pages/aboutpage.php">Terms & Conditions</a>
+            <a href="pages/aboutpage.php">Community Guidelines</a>
           </div>
         </div>
         <div class="sm-cont">
           <h1>Follow us on..</h1>
           <div class="sm">
-            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-youtube"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -159,9 +181,24 @@
       </div>
       <div class="footer-bottom">
         <i class="fa-regular fa-copyright"></i>
-        <p class="date">2025</p>
-        <p>S☆und Haven — All rights reserved. Crafted for music lovers worldwide.</p>
+        <font class="date"> 2026 </font>
+        <font> S☆und Haven — All rights reserved. Crafted for music lovers worldwide.</font>
       </div>
     </footer>
+    <script>
+      // set date for copy right
+      var date = new Date();
+      document.querySelector(".date").innerHTML = date.getFullYear();
+    </script>
+    <script>
+      // prohibited to copy text
+      document.addEventListener("copy", function (event) {
+      event.clipboardData.setData(
+        "text/plain",
+        "⚠️ sorry content is not being copied."
+      );
+        event.preventDefault();
+      });
+    </script>
   </body>
 </html>
