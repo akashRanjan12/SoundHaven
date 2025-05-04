@@ -1,3 +1,6 @@
+<?php
+  require "../config\configuration.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,13 +45,60 @@
         <div class="card">
           <p class="logo">𝄞</p>
           <p class="logo">S☆und Haven</p><br>
-            <form action="" method="POST">
-              <input id="wid" type="text" name="username" placeholder="Enter Nmae here..." required>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+              <input id="wid" type="text" name="name" placeholder="Enter Nmae here..." required>
               <input id="wid" type="email" name="email" placeholder="Enter e-mail here..." required>
               <input id="wid" type="password" name="password" placeholder="Enter Password..." required>
               <input id="wid" type="password" name="repassword" placeholder="Enter again password..." required>
               <input class="white-btn" type="submit" name="submit">
             </form><br>
+            <?php
+require "../config/configuration.php";
+session_start();
+
+$name = $email = $pass = $c_pass = "";
+$message = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"])) {
+  $name = htmlspecialchars(trim($_POST["name"]));
+  $email = htmlspecialchars(trim($_POST["email"]));
+  $pass = $_POST["password"];
+  $c_pass = $_POST["repassword"];
+
+  if (empty($name)) {
+    $message = "<p style='color:red;'>Name is required</p>";
+  } elseif (empty($email)) {
+    $message = "<p style='color:red;'>Email is required</p>";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $message = "<p style='color:red;'>Invalid email format</p>";
+  } elseif (empty($pass)) {
+    $message = "<p style='color:red;'>Password is required</p>";
+  } elseif (strlen($pass) < 6) {
+    $message = "<p style='color:red;'>Password must be at least 6 characters</p>";
+  } elseif ($pass !== $c_pass) {
+    $message = "<p style='color:red;'>Passwords do not match</p>";
+  } else {
+    try {
+      $check = $connection->prepare("SELECT * FROM userdetails WHERE email = ?");
+      $check->bind_param("s", $email);
+      $check->execute();
+      $res = $check->get_result();
+
+      if ($res->num_rows > 0) {
+        $message = "<p style='color:red; text-align:center;'>This email already exists. Try another.</p>";
+      } else {
+        $_SESSION["name"] = $name;
+        $_SESSION["email"] = $email;
+        $_SESSION["password"] = password_hash($pass, PASSWORD_DEFAULT); // store hashed, insert after OTP
+        header("Location: ../pages/otp.php");
+        exit();
+      }
+    } catch (mysqli_sql_exception $e) {
+      $message = "<p style='color:red;'>Database error: " . $e->getMessage() . "</p>";
+    }
+        }
+      }
+        ?>
             <p id="Psize">Already have an account? <a href="../pages/login.php"> Login!</a></p>
         </div>
       </div>
