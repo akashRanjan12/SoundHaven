@@ -117,8 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["verify"])) {
           <input id="wid" type="text" name="otp" placeholder="Enter OTP here..." required />
           <input class="transparent-btn" type="submit" name="verify" value="Verify OTP" />
         </form>
-        <?= $message ?>
-        <p>OTP sent to <b><?= htmlspecialchars($email) ?></b></p>
+        <br>
+        <?= $message ?>  <br>
+        <!-- <p>OTP sent to <b><?= htmlspecialchars($email) ?></b></p> -->
         <p>Didn't receive OTP? <a href="?resend=true">Resend OTP</a></p>
         <br>
         <a href="../pages/sigin.php">Go Back</a>

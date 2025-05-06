@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FOOTER</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer" />
+
     <style>
       * {
         padding: 0;
@@ -139,8 +128,6 @@
         }
       }
     </style>
-  </head>
-  <body>
     <footer>
       <div class="container-01">
         <div class="logo-cont">
@@ -190,15 +177,3 @@
       var date = new Date();
       document.querySelector(".date").innerHTML = date.getFullYear();
     </script>
-    <script>
-      // prohibited to copy text
-      document.addEventListener("copy", function (event) {
-      event.clipboardData.setData(
-        "text/plain",
-        "⚠️ sorry content is not being copied."
-      );
-        event.preventDefault();
-      });
-    </script>
-  </body>
-</html>

@@ -37,6 +37,11 @@
       ?>
      <!-- main part--------------------- -->
       <!-- form -->
+       <span style="text-align: center;">
+       <h1>Under developing...</h1>
+       <h2>This feature avalible soon.</h2>
+       <h3>Till use another e-mail or <a style="color: blueviolet;" href="mailto:akash12ranjan@gmail.com">contact</a> via mail.</h3>
+       </span>
       <div class="form-container">
       <div class="container">
         <div class="card">
@@ -46,7 +51,7 @@
               <input id="wid" type="email" name="email" placeholder="Enter e-mail here..." required>
               <input class="transparent-btn" type="submit" name="submit" style="padding: 4px 80px; align-self: center;">
             </form><br>
-            <p id="Psize">Link will be sent to your e-mail! <br> to set new password.</p>
+            <p id="Psize">Link will be sent to your e-mail! <br> To set new password.</p>
         </div>
       </div>
        </div>

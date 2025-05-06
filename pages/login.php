@@ -46,7 +46,54 @@
               <input id="wid" type="email" name="email" placeholder="Enter e-mail here..." required>
               <input id="wid" type="password" name="password" placeholder="Enter Password..." required>
               <input class="white-btn" type="submit" name="submit">
-            </form><br>
+            </form>
+            <?php
+               require("../config/configuration.php");
+               //check if the form is submitted
+                 if($_SERVER["REQUEST_METHOD"] == "POST"){
+                   if(isset($_POST["submit"])){
+                       $email = filter_input(INPUT_POST,"email", FILTER_SANITIZE_SPECIAL_CHARS);
+                       $password = $_POST["password"];
+                       if(empty($email)){
+                           echo "*<u style='color:red;'>e-mail is required</u><br>";
+                       }else if(empty($password)){
+                           echo "*<u style='color:red;'>password is required</u><br>";
+                       }else{
+                          try{   
+                            $check = $connection->prepare("SELECT * FROM userdetails WHERE email = ?");
+                            $check->bind_param("s", $email);
+                            $check->execute();
+                            $result = $check->get_result();
+               
+                            if($result->num_rows === 1){
+                               $row = $result->fetch_assoc();
+                               $hashed_password = $row['password'];
+                               if(password_verify($password, $hashed_password)){
+                                   // Password is correct, set session variables and redirect to dashboard
+                                   session_start();
+                                   $_SESSION['name'] = $row['name'];
+                                   $_SESSION['email'] = $row['email'];
+                                   header("Location: ../User/userDashboard.php");
+                                   exit();
+                               } else {
+                                   echo "<u style='color:red;'>Invalid password</u><br>";
+                               }
+                            }else{
+                               echo "<u style='color:red;'>Email not found</u><br>";
+                            }            
+                          }catch(Exception $e){
+                              echo "Error: " . $e->getMessage() . "<br>";
+                          }
+                          finally{
+                              //close the connection
+                               mysqli_close($connection);
+                               $check->close();
+                          }
+                       }
+                   }
+                 }
+            ?>
+            <br>
             <p id="Psize">Create New account <a href="../pages/sigin.php"> Create one!</a></p>
         </div>
       </div>
@@ -58,7 +105,7 @@
         ?>
     </footer>
     <script src="../assets/js/preload.js"></script>
-    <script>
+    <!-- <script>
       // prohibited to copy text
       document.addEventListener("copy", function (event) {
         event.clipboardData.setData(
@@ -67,6 +114,6 @@
         );
         event.preventDefault();
       });
-    </script>
+    </script> -->
 </body>
 </html>

@@ -167,6 +167,7 @@ body {
     #Psize {
       font-size: 1rem;
       color: whitesmoke;
+      text-align: center;
       a {
         &:hover {
           color: blue;
