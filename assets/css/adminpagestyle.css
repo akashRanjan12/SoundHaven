@@ -120,3 +120,14 @@ main {
     }
   }
 }
+/* second navbar-------------------------- */
+.s_navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40px;
+  border-bottom: 1px solid gray;
+  .transparent-btn {
+    padding: 3px 25px;
+  }
+}

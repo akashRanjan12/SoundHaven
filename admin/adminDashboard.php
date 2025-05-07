@@ -5,6 +5,11 @@ session_start();
 if(!isset($_SESSION["adminname"], $_SESSION["adminemail"])){
     header("Location: admin_sigin_login.php");
 }
+if(isset($_POST["logout"])){
+    session_destroy();
+    header("Location: ../index.php");
+    exit();
+}
 
 // feeding data into the database----------------------
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
@@ -50,11 +55,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     <title>Document</title>
     <link rel="stylesheet" href="../assets/css/samestyle.css">
     <link rel="stylesheet" href="../assets/css/adminpagestyle.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
 </head>
 <body>
     <?php
         require "../includes/navbar.html";
     ?>
+    <div class="s_navbar">
+        <span class="name">
+            <?php
+                echo "<i class='fa-solid fa-user-tie'></i> " . Ucfirst($_SESSION["adminname"]);
+            ?>
+        </span>
+        <form action="" method="POST">
+            <input type="submit" class="transparent-btn" name="logout" value="Logut Admin">
+        </form>
+    </div>
     <main>
         <div class="container">
             <div class="image-cont">

@@ -2,7 +2,13 @@
 session_start();
 
 if (!isset($_SESSION["useremail"], $_SESSION["username"])) {
-  header("Location: ../pages/login.php");
+  header("Location: ../index.php");
+  exit();
+}
+
+if (isset($_POST["logout"])) {
+  session_destroy();
+  header("Location: ../pages/logout.php");
   exit();
 }
 require '../config/configuration.php';
@@ -75,11 +81,9 @@ require '../config/configuration.php';
           <span><a href="profile">Profile</a></span>
           <span><a href="likes">Likes</a></span>
           <span><a href="upload">Uploads</a></span>
-          <span>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
+            <form style="display: inline-block;" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
               <input type="submit" name="logout" value="Logout Account">
             </form>
-          </span>
         </div>
       </div>
 
@@ -113,10 +117,7 @@ require '../config/configuration.php';
     </footer>
 
     <!-- Scripts -->
-    <script src="../assets/js/preload.js"></script>
-    <script src="userassets/userburgerlogic.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/preload.js"></script>
+<script src="../assets/js/preload.js"></script>
 <script src="userassets/userburgerlogic.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -215,11 +216,3 @@ require '../config/configuration.php';
 </script>
   </body>
 </html>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
-  session_destroy();
-  header("Location: ../logout.php");
-  exit();
-}
-?>

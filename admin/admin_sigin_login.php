@@ -87,7 +87,7 @@ $flip = false;
             }
         ?>
     </div>
-
+            <a name="login"></a>
     <!-- Login form (Back Side) -->
     <div class="side back">
         <p id="admin">Admin</p><br>
