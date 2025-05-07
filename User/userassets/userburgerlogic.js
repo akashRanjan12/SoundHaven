@@ -60,12 +60,10 @@ document.querySelector(".logo").addEventListener("click", () => {
   }
 });
 
-// ✅ Close all menus on main click
 document.querySelector("main").addEventListener("click", () => {
   closeAllMenus();
 });
 
-// ✅ Close all menus when a <span> inside menu is clicked
 document
   .querySelectorAll(".burger-menu span, .user-menu span, .special_menu span")
   .forEach((span) => {
@@ -74,7 +72,6 @@ document
     });
   });
 
-// ✅ Helper function to close all menus
 function closeAllMenus() {
   const menus = [
     {

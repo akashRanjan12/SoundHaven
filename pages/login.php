@@ -71,8 +71,8 @@
                                if(password_verify($password, $hashed_password)){
                                    // Password is correct, set session variables and redirect to dashboard
                                    session_start();
-                                   $_SESSION['name'] = $row['name'];
-                                   $_SESSION['email'] = $row['email'];
+                                   $_SESSION['username'] = $row['name'];
+                                   $_SESSION['useremail'] = $row['email'];
                                    header("Location: ../User/userDashboard.php");
                                    exit();
                                } else {

@@ -1,7 +1,8 @@
+
 <?php
 session_start();
 
-if(isset($_SESSION["email"], $_SESSION["name"])){
+if(isset($_SESSION["useremail"], $_SESSION["username"])){
   header("Location: user/userDashboard.php");
   exit();
 }
