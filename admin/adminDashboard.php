@@ -11,7 +11,7 @@ if(isset($_POST["logout"])){
     exit();
 }
 
-// feeding data into the database----------------------
+// insirting data into the database----------------------
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             $stmt = $connection->prepare("INSERT INTO blogcontent (image, title, content) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $dbPath, $title, $content);
             if ($stmt->execute()) {
-                header("Location: " . $_SERVER['PHP_SELF']);
+                header("Location: " . $_SERVER['PHP_SELF'] . "#posts");
                 exit();
             } else {
                 echo "<script>alert('Database insert failed.');</script>";
@@ -90,6 +90,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             </form>
         </div>
     </main>
+    <feed>
+        <a name="posts"></a>
+        <div class="feed-container">
+        <?php
+// Retrieve content data from the database
+$res = $connection->query("SELECT * FROM blogcontent ORDER BY post_id DESC");
+if ($res->num_rows > 0) {
+    while ($row = $res->fetch_assoc()) {
+        $image = "<img src='" . htmlspecialchars($row['image']) . "' width='280px'><br>";
+        $title = htmlspecialchars($row["title"]);
+        $content = htmlspecialchars($row["content"]);
+        $id = htmlspecialchars($row["post_id"]);
+
+        echo "<div class='box'>";
+        echo $image;
+        echo "<p class='title'>" . $title . "</p>";
+        echo "<p>" . $content . "</p>";  
+        echo "<p style='text-align: end; width:97%;'>" . htmlspecialchars($row['create_at']) . "</p>";
+
+        // Add hidden input to send post_id
+        echo "<form action='adminDashboard.php' method='POST'>
+                <input type='hidden' name='post_id' value='" . $id . "'>
+                <input class='white-btn' type='submit' name='delete' value='Delete Post'>
+              </form>";
+
+        echo $id;
+        echo "</div><br>";  
+    }
+} else {
+    echo "There are no posts uploaded yet.";
+}
+
+// Handle delete request
+if (isset($_POST["delete"]) && isset($_POST["post_id"])) {
+    $postIdToDelete = (int) $_POST["post_id"];
+    $stmt = $connection->prepare("DELETE FROM blogcontent WHERE post_id = ?");
+    $stmt->bind_param("i", $postIdToDelete);
+    $stmt->execute();
+    echo "<script>location.href='adminDashboard.php';</script>"; // Refresh the page after deletion
+}
+?>
+
+        </div>
+    </feed>
+    <script src="../assets/js/logic.js"></script>
     <script>
     document.querySelector('input[type="file"]').addEventListener('change', function(event) {
     const file = event.target.files[0];

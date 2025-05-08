@@ -131,3 +131,52 @@ main {
     padding: 3px 25px;
   }
 }
+/* content */
+.feed-container {
+  padding-bottom: 40px;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .box {
+    padding: 5px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    .title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    p {
+      padding: 10px;
+      text-align: center;
+    }
+    form {
+      width: 97%;
+      display: flex;
+      justify-content: flex-end;
+      .white-btn {
+        padding: 4px 20px;
+      }
+      input {
+        text-align: end;
+      }
+    }
+  }
+}
+
+@media (max-width: 668px) {
+  .feed-container {
+    .box {
+      width: 90%;
+    }
+  }
+}

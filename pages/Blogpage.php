@@ -1,3 +1,8 @@
+
+<?php
+require "../config/configuration.php";
+// session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +16,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="pages.css">
+      <link rel="stylesheet" href="../assets/css/blogstyle.css">
 </head>
 <body>
         <!-- preloader------------------ -->
@@ -31,7 +37,89 @@
       <h3>Website is loading please wait...</h3>
     </div>
     <!-- end preloader-------------- -->
-    <h1>Blog page</h1>
+     <div class="navbar">
+          <div class="logo">𝄞 S☆und Haven</div>
+          <a href="../index.php" class="home"><i class="fa-solid fa-arrow-left-long"></i> Go Home</a>
+     </div>
+     <header>
+      <div class="landing-page">
+     <?php
+        // Retrieve content data from the database
+        $res = $connection->query("SELECT * FROM blogcontent WHERE post_id = 12");
+    if ($res->num_rows > 0) {
+    while ($row = $res->fetch_assoc()) {
+        $image = "<img src='" . htmlspecialchars($row['image']) . "' width='350px'>";
+        $title = htmlspecialchars($row["title"]);
+        $content = htmlspecialchars($row["content"]);
+        $id = htmlspecialchars($row["post_id"]);
+
+        echo "<div class='box'>";
+        echo "<div class='image-sec reveal'>";
+        echo $image;
+        echo "</div>";
+        echo "<div class='data-sec reveal'>";
+        echo "<p class='title'>" . $title . "</p><br>";
+        echo "<p class='content'>" . $content . "</p>";  
+        // echo "<p style='text-align: end; width:97%;'>" . htmlspecialchars($row['create_at']) . "</p>";
+        echo "</div>";
+        echo "</div><br>";  
+    }
+} else {
+    echo "There are no posts uploaded yet.";
+}
+?>
+      </div>
+     </header>
+     <main>
+      <div class="blog-container">
+     <?php
+      // Retrieve content data from the database
+      $res = $connection->query("SELECT * FROM blogcontent ORDER BY post_id DESC");
+    if ($res->num_rows > 0) {
+    while ($row = $res->fetch_assoc()) {
+        $image = "<img src='" . htmlspecialchars($row['image']) . "' width='280px'><br>";
+        $title = htmlspecialchars($row["title"]);
+        $content = htmlspecialchars($row["content"]);
+        $id = htmlspecialchars($row["post_id"]);
+
+        echo "<div class='box reveal'>";
+        echo $image;
+        echo "<p class='title'>" . $title . "</p>";
+        echo "<p class='content'>" . $content . "</p>";  
+        echo "<p style='text-align: end; width:97%;'>" . htmlspecialchars($row['create_at']) . "</p>";
+        echo "</div><br>";  
+    }
+} else {
+    echo "There are no posts uploaded yet.";
+}
+?>
+      </div>
+     </main>
+    <footer>
+      <?php
+        require "../includes/pagesfooter.php";
+      ?>
+    </footer>
     <script src="../assets/js/preload.js"></script>
+    <script>
+      // scroll eff--------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  const elements = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  ); // Trigger when 20% of the element is visible
+
+  elements.forEach((el) => observer.observe(el));
+});
+
+    </script>
 </body>
 </html>

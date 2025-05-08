@@ -31,14 +31,14 @@
 .search-container {
   form {
     input {
-      width: 300px;
+      width: 400px;
       outline: none;
       padding: 5px;
       font-size: 1.1rem;
       border-radius: 7px;
-      background-color: rgba(255, 255, 255, 0.248);
+      background-color: rgba(77, 77, 77, 0.248);
       color: white;
-      border: none;
+      border: 1ps solid gray;
       &:focus {
         outline: none;
       }
@@ -262,7 +262,6 @@ audio::-webkit-media-controls-mute-button {
 #global-audio {
   display: none;
 }
-
 /* media querries---------------------------------- */
 @media screen and (max-width: 678px) {
   .global-audio-container {
