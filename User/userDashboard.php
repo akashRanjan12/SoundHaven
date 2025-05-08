@@ -7,7 +7,7 @@ if (!isset($_SESSION["useremail"], $_SESSION["username"])) {
 }
 
 if (isset($_POST["logout"])) {
-  echo "<script>localStorage.clear();</script>";
+  echo "<scrip>localStorage.clear();</script>";
   session_destroy();
   header("Location: ../pages/logout.php");
   exit();
@@ -29,18 +29,20 @@ require '../config/configuration.php';
     <link rel="stylesheet" href="userassets/userstyle.css" />
   </head>
   <body>
-    <div id="preloader">
-      <p style="font-size: 7rem">𝄞</p>
-      <p>S☆und Haven</p>
-      <div class="loading">
-        <svg width="64px" height="48px">
-          <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
-          <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
-        </svg>
-      </div>
-      <h1>Welcome to the S☆und Haven.</h1>
-      <h3>Website is loading, please wait...</h3>
-    </div>
+    <!-- preloader -->
+  <div id="preloader">
+  <p style="font-size: 7rem">𝄞</p>
+  <p>S☆und Haven</p>
+  <div class="loading">
+    <svg width="64px" height="48px">
+      <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
+      <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+    </svg>
+  </div>
+  <h1>Welcome to the S☆und Haven.</h1>
+  <h3>Website is loading, please wait...</h3>
+</div>
+<!-- end preloader -->
 
     <header>
       <div class="usernavbar">
@@ -97,7 +99,7 @@ require '../config/configuration.php';
     </header>
 <!-- ajax contetn section reloaded all the views section -->
     <main>
-      <div class="content">Loading content...</div>
+      <div class="content" style="height: auto;">Loading content...</div>
     </main>
 <!-- audio player -->
     <div class="global-audio-container">
@@ -111,10 +113,29 @@ require '../config/configuration.php';
       <?php require "../includes/userfooter.php"; ?>
     </footer>
 
-<script src="../assets/js/preload.js"></script>
+
 <script src="userassets/userburgerlogic.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="userassets/ajax.js"></script>
+<script>
+  window.addEventListener("load", function () {
+  const preloader = document.getElementById("preloader");
+  const contentDiv = document.querySelector(".content");
+
+  if (!localStorage.getItem("visited")) {
+    localStorage.setItem("visited", "true");
+    if (preloader) preloader.style.display = "block";
+
+    setTimeout(function () {
+      if (preloader) preloader.style.display = "none";
+      if (contentDiv) contentDiv.style.display = "block";
+    }, 2000);
+  } else {
+    if (preloader) preloader.style.display = "none";
+    if (contentDiv) contentDiv.style.display = "block";
+  }
+});
+</script>
 <script>
   document.querySelectorAll(".blog, .about").forEach(item => {
     item.addEventListener("click", () => {
