@@ -1,133 +1,203 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flip Card Login/Signup</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f2f2f2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
+<?php
+    session_start();
+?>
+<style>
+  .profile-background-image-container {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
 
-      .card-container {
-        width: 300px;
-        height: 380px;
-        perspective: 1000px;
-      }
+  .profile-background-image-container:hover {
+    transform: scale(1.05);
+  }
 
-      .card {
+  .profile-background-image-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+  }
+
+  .profile-background-image-container form {
+    position: absolute;
+    bottom: 0%;
+    right: -80%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 5px solid white;
+  }
+
+  .profile-image form {
+    position: absolute;
+    top: -20px;
+    right: -50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .profile-image .image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+  }
+
+  .upload-btn {
+    /* background-color: #007bff;
+      color: white; */
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 4px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+
+  .upload-btn input[type="file"] {
+    display: none;
+  }
+</style>
+
+<div class="profile-details">
+  <!-- Background Image -->
+  <div class="profile-background-image-container">
+    <img
+      id="backgroundPreview"
+      src=""
+      alt="Profile Background Image"
+      style="
         width: 100%;
         height: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.8s;
-      }
-
-      .card.flip {
-        transform: rotateY(180deg);
-      }
-
-      .side {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        background: white;
+        object-fit: cover;
         border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-      }
+      " />
+    <form>
+      <label class="upload-btn">
+        <span id="bgLabel">Upload</span>
+        <input
+          type="file"
+          name="profile_background_image"
+          id="profile_background_image"
+          onchange="previewImage(event, 'background')" />
+      </label>
+    </form>
+  </div>
 
-      .front,
-      .back {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .back {
-        transform: rotateY(180deg);
-      }
-
-      h2 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      input {
-        margin: 8px 0;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button {
-        margin-top: 10px;
-        padding: 10px;
-        width: 100%;
-        border: none;
-        border-radius: 5px;
-        background-color: #4caf50;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .toggle-btn {
-        background-color: transparent;
-        color: #333;
-        margin-top: 10px;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card-container">
-      <div class="card" id="card">
-        <!-- Login Form -->
-        <div class="side front">
-          <h2>Login</h2>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button>Login</button>
-          <div class="toggle-btn" onclick="flipCard()">
-            Don't have an account? Sign Up
-          </div>
-        </div>
-
-        <!-- Sign Up Form -->
-        <div class="side back">
-          <h2>Sign Up</h2>
-          <input type="text" placeholder="Name" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button onclick="signup()">Sign Up</button>
-          <div class="toggle-btn" onclick="flipCard()">
-            Already have an account? Login
-          </div>
-        </div>
-      </div>
+  <!-- Profile Image -->
+  <div class="profile-image">
+    <div class="image">
+      <img
+        id="profilePreview"
+        src=""
+        alt="Profile Image"
+        style="
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+        " />
     </div>
+    <form>
+      <label class="upload-btn">
+        <span id="profileLabel">Upload</span>
+        <input
+          type="file"
+          name="profile_image"
+          id="profile_image"
+          onchange="previewImage(event, 'profile')" />
+      </label>
+    </form>
+  </div>
+</div>
 
-    <script>
-      const card = document.getElementById("card");
+<!-- <script>
+  // Function to load stored images from sessionStorage
+  function loadStoredImages() {
+    const background = sessionStorage.getItem("profile_background_image");
+    const profile = sessionStorage.getItem("profile_image");
 
-      function flipCard() {
-        card.classList.toggle("flip");
-      }
+    document.getElementById("backgroundPreview").src = background
+      ? background
+      : "https://via.placeholder.com/1080x300?text=Background+Image";
+    document.getElementById("bgLabel").innerText = background ? "Update" : "Upload";
 
-      function signup() {
-        alert("Signed up successfully!");
-        // Automatically flip to login
-        card.classList.remove("flip");
-      }
-    </script>
-  </body>
-</html>
+    document.getElementById("profilePreview").src = profile
+      ? profile
+      : "https://via.placeholder.com/150?text=Profile+Image";
+    document.getElementById("profileLabel").innerText = profile ? "Update" : "Upload";
+  }
+
+  window.loadStoredImages = loadStoredImages;
+
+  // Call loadStoredImages when the page loads or when navigating back to the dashboard
+  if (typeof loadStoredImages === "function") {
+    loadStoredImages();
+  }
+
+  // Function to handle image preview and store it in sessionStorage
+  function previewImage(event, type) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64Data = e.target.result;  
+
+        // Update the preview and store the image data in sessionStorage
+        if (type === "background") {
+          document.getElementById("backgroundPreview").src = base64Data;
+          sessionStorage.setItem("profile_background_image", base64Data);
+          document.getElementById("bgLabel").innerText = "Update";
+        } else if (type === "profile") {
+          document.getElementById("profilePreview").src = base64Data;
+          sessionStorage.setItem("profile_image", base64Data);
+          document.getElementById("profileLabel").innerText = "Update";
+        }
+
+        // Reset file input so that same image can be selected again
+        event.target.value = "";
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  </script> -->

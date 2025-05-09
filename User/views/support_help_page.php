@@ -934,13 +934,13 @@
           <li>Email: akash@soundhaven.com</li>
           <li>
             LinkedIn:
-            <a href="https://linkedin.com/in/akashranjan" target="_blank"
+            <a href="" target="_blank"
               >linkedin.com/in/akashranjan</a
             >
           </li>
           <li>
             Portfolio:
-            <a href="https://akashranjan.dev" target="_blank"
+            <a href="" target="_blank"
               >akashranjan.dev</a
             >
           </li>

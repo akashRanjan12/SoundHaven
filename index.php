@@ -342,7 +342,25 @@ require 'config/configuration.php';
     </footer>
     <script src="assets/js/logic.js"></script>
     <script src="assets/js/suffle.js"></script>
-    <script src="assets/js/preload.js"></script>
+    <script>
+      window.addEventListener("load", function () {
+  const preloader = document.getElementById("preloader");
+  const contentDiv = document.querySelector(".content");
+
+  if (!localStorage.getItem("visited")) {
+    localStorage.setItem("visited", "true");
+    if (preloader) preloader.style.display = "block";
+
+    setTimeout(function () {
+      if (preloader) preloader.style.display = "none";
+      if (contentDiv) contentDiv.style.display = "block";
+    }, 2000);
+  } else {
+    if (preloader) preloader.style.display = "none";
+    if (contentDiv) contentDiv.style.display = "block";
+  }
+});
+    </script>
     <script>
       // prohibited to copy text
       document.addEventListener("copy", function (event) {

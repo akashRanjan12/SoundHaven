@@ -202,6 +202,18 @@ $(document).ready(function () {
     $(".content").load("views/" + page + ".php", function () {
       bindTrackPlayEvents();
     });
+    // // this is the profile image fix
+    // // Fix: If dashboard is loaded, restore profile images
+    // //  const page = window.location.hash.substring(1) || "home";
+    // $(".content").load("views/" + page + ".php", function () {
+    //   bindTrackPlayEvents();
+    //   if (
+    //     page === "userDashboard" &&
+    //     typeof window.loadStoredImages === "function"
+    //   ) {
+    //     window.loadStoredImages();
+    //   }
+    // });
   }
 
   // SPA navigation with hash---------------------------------------
