@@ -6,7 +6,7 @@ $usermail = $_SESSION['useremail'];
 $username = $_SESSION['username'];
 
 echo "<h1 style='text-align: center; color: white;'>Welcome " . ucfirst($username) . "</h1>";
-echo "<h3 style='text-align: center; color: white;'>You're logged in with this " . $usermail . " e-mail</h3>";
+echo "<h4 style='text-align: center; color: white;'>" . $usermail . "</h4>";
 // Fetch image
 
 $res = $connection->query("SELECT * FROM userdetails WHERE email = '$usermail'");
@@ -274,6 +274,39 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
           border-color: white;
         }
       }
+      .allmusic-section{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      .track-item{     
+        width: 60%;
+        display: flex;
+        justify-self: center;
+          button{
+            display: flex;
+            width: 100%;
+            background-color: white;
+            color: black;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+          }     
+          p{            
+            text-align: start;
+            padding: 4px 10px;
+            font-size: 1.2rem;
+          }   
+      }
+    }
+    #des{
+        width: 60%;
+        display: flex;
+        justify-self: center;
+        text-align: start; 
+        font-size: 1rem;
+        border-bottom:1px solid white;
+        padding-left: 20px;
+    }
     /* media querries--------------------- */
     @media (max-width: 768px) {
     .profile-image-container {
@@ -289,7 +322,57 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
     .transparent-btn{
       padding: 3px 10px;
     }
-    
+    .allmusic-section{
+      .track-item{     
+          button{
+            display: flex;
+            width: 100%;
+            background-color: white;
+            color: black;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+          }     
+          p{
+            text-align: start;
+            padding: 4px 10px;
+            font-size: 1.2rem;
+          }   
+      }
+    }
+    .allmusic-section{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      .track-item{     
+        width: 100%;
+        display: flex;
+        justify-self: center;
+          button{
+            display: flex;
+            width: 100%;
+            background-color: white;
+            color: black;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+          }     
+          p{            
+            text-align: start;
+            padding: 4px 10px;
+            font-size: 1.2rem;
+          }   
+      }
+    }
+    #des{
+        width: 100%;
+        display: flex;
+        justify-self:unset;
+        text-align: start; 
+        padding: 4px 0px; 
+        font-size: 1rem;
+        border-bottom:1px solid white;
+    }
   }
     @media (max-width: 512px) {
     .profile-image-container {
@@ -382,15 +465,35 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
 </div>
 <div class="menu-content-container">
   <div class="first-content menu-content1">
-    <div class="allmusic-section">
-      <p id="msg">Seems a little quiet over here.</p>
-      <?php
-        // inseting the music in the database---
+    <div class="allmusic-section">       
+  <?php
+      // Retrieve title, description, and music path from the usercontent table
+      $musicRes = $connection->query("SELECT * FROM usercontent WHERE user_id = (SELECT id FROM userdetails WHERE email = '$usermail') ORDER BY uploaded_at DESC");
+            if ($musicRes->num_rows > 0) {
+          while ($row = $musicRes->fetch_assoc()) {
+              // Fetch title, description, and music path
+              $title = htmlspecialchars($row['title']);
+              $description = htmlspecialchars($row['description']);
+              $musicPath = htmlspecialchars($row['music_path']);
+              
+              // Display each track with the play button
+              echo "
+              <div class='track-item'>
+                <button class='play-track' data-src='../Uploads/$musicPath'>
+                <p>$title</p>                
+                ▶ Play $title
+                </button>
+              </div>
+               <p id='des'>$description</p><br>";
+            }
+            } else {
+                echo "<p>There are no posts uploaded yet.</p>";
+            }
+        ?>
+      </div>
 
-      ?>
-    </div>
     <div class="upload-btn">
-      <p class="upbtn transparent-btn" >Upload you track now.</p>
+      <p class="upbtn transparent-btn" onclick="openUploadContainer()">Upload you track now.</p>
       <p class="upbtn white-btn" onclick="openUploadContainer()">upload</p>
     </div>
   </div>
@@ -578,8 +681,7 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
   });
 </script>
 <script>
-//  handling ajax form submission for music upload
-  document.getElementById('upload-form').addEventListener('submit', function(event) {
+document.getElementById('upload-form').addEventListener('submit', function(event) {
     event.preventDefault();
     let formData = new FormData(this);
     
@@ -591,7 +693,30 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
     .then(data => {
       if (data.success) {
         alert('Music uploaded successfully!');
-        // Optionally, you can refresh the page or update the UI to show the new track
+        
+        // Create audio player dynamically
+        let audioPlayer = document.createElement('audio');
+        audioPlayer.controls = true;
+        audioPlayer.src = '../../Uploads/' + data.music_path; // Ensure 'music_path' is in the response
+
+        // Create title and description
+        let title = document.createElement('h3');
+        title.textContent = data.title; // Ensure 'title' is in the response
+
+        let description = document.createElement('p');
+        description.textContent = data.description; // Ensure 'description' is in the response
+
+        // Create a container for the music item
+        let musicItem = document.createElement('div');
+        musicItem.classList.add('music-item');
+
+        // Append elements to music item
+        musicItem.appendChild(title);
+        musicItem.appendChild(description);
+        musicItem.appendChild(audioPlayer);
+
+        // Append music item to the music section
+        document.querySelector('.allmusic-section').appendChild(musicItem);
       } else {
         alert('Music upload failed.');
       }
@@ -600,7 +725,9 @@ $imageUrl2 = !empty($backgroundImage) ? "/SoundHaven/Uploads/$backgroundImage" :
       console.error('Error:', error);
       alert('Error occurred during music upload.');
     });
-  });
+});
 </script>
+
+
 </body>
 </html>

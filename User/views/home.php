@@ -17,18 +17,3 @@
   <p>Artist: Unknown</p>
 </div>
 
-
-<!-- store the muisc or data in this form -->
-
-<!--  Example: Assume $conn is your mysqli connection
- $query = "SELECT title, file_path FROM user_tracks WHERE user_id = ?";
- $stmt = $conn->prepare($query);
- $stmt->bind_param("i", $userId);
- $stmt->execute();
- $result = $stmt->get_result();
-
- while ($row = $result->fetch_assoc()) {
-     $title = htmlspecialchars($row['title']);
-     $filePath = htmlspecialchars($row['file_path']);
-     echo '<button class="play-track" data-src="' . $filePath . '">▶️ ' . $title . '</button>';
- } -->

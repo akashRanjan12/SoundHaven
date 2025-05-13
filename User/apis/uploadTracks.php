@@ -59,9 +59,13 @@ try {
     }
 
     echo json_encode([
-        'success' => true,
-        'message' => 'Music uploaded successfully!',
-        'fileUrl' => '../../Uploads/' . $fileName
+        // 'success' => true,
+        // 'message' => 'Music uploaded successfully!',
+        // 'fileUrl' => '../../Uploads/' . $fileName
+          'success' => true,
+    'music_path' => 'path/to/music.mp3',
+    'title' => $title,
+    'description' => $description
     ]);
     exit;
 
