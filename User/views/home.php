@@ -1,19 +1,43 @@
+<?php
+// Assuming you have a session started and user data available
+session_start();
+require  "../../config/configuration.php";
+?>
 
-<h1>Main Home</h1>
-
-<div class="track-item">
-  <button class="play-track" data-src="../Uploads/WhatsApp Audio 2025-05-03 at 14.34.56_b08f2fff.mp3">
-    ▶️ Play Track 1
-  </button>
-  <p>Title: WhatsApp Audio 2025-05-03</p>
-  <p>Artist: Unknown</p>
-</div>
-
-<div class="track-item">
-  <button class="play-track" data-src="../Uploads/WhatsApp Audio 2025-05-06 at 14.12.18_e90fbdba.mp3">
-    ▶️ Play Track 2
-  </button>
-  <p>Title: WhatsApp Audio 2025-05-06</p>
-  <p>Artist: Unknown</p>
-</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+  .current-playlist-container{
+    padding: 20px;
+  }
+</style>
+<body>
+  <div class="current-playlist-container">
+    <h1>This is the section of latest play music by the user</h1>
+    <h3>this feature will coming soon</h3>
+  </div>
+  <div class="user-playlist-container">
+    <div class="user">
+        
+    </div>
+  </div>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".view-user-tracks").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const userEmail = this.parentElement.getAttribute("data-email");
+        // Store selected email in sessionStorage
+        sessionStorage.setItem("selectedUserEmail", userEmail);
+        // Load the specific user's track view (SPA method)
+        $(".content").load("views/track.php");
+      });
+    });
+  });
+</script>
+</body>
+</html>
